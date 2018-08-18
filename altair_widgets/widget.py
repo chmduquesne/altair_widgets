@@ -232,8 +232,15 @@ def _get_types():
 
 
 def _get_encodings():
-    return ['x', 'y', 'color', 'text', 'row', 'column',
-            'opacity', 'shape', 'size']
+    # All the subclasses of altair.FieldChannelMixin, lowercase
+    encodings = []
+    for name in dir(altair):
+        value = getattr(altair, name)
+        if (type(value) is type and
+            issubclass(value, altair.FieldChannelMixin) and
+            name != 'FieldChannelMixin'):
+            encodings.append(name.lower())
+    return encodings
 
 
 def _get_functions():
