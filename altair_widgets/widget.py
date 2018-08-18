@@ -240,7 +240,10 @@ def _get_encodings():
             issubclass(value, altair.FieldChannelMixin) and
             name != 'FieldChannelMixin'):
             encodings.append(name.lower())
-    return encodings
+    # reorder to have the most useful encodings at the top
+    top = ['x', 'y', 'color']
+    list(map(encodings.remove, top))
+    return top + sorted(encodings)
 
 
 def _get_functions():
