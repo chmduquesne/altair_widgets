@@ -242,8 +242,8 @@ def _get_encodings():
             encodings.append(name.lower())
     # reorder to have the most useful encodings at the top
     top = ['x', 'y', 'color']
-    list(map(encodings.remove, top))
-    return top + sorted(encodings)
+    others = sorted([e for e in encodings if e not in top])
+    return top + others
 
 
 def _get_functions():
